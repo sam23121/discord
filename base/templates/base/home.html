@@ -2,12 +2,35 @@
 
 
 {% block content %}
-    <h1>hello</h1>
-<h1>hello django</h1>
-<div>
-    <a href="{% url 'create-room' %}">Create Room</a>
-</div>
-{% for room in rooms %}
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+<div class="home-container">
+
+    <div>
+        <h3>Browse topic</h3>
+        <hr>
+
+        <div>
+            <a href="{% url 'home' %}">All</a>
+        </div>
+
+        {% for topic in topics %}
+        <div>
+            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h5>{{room_count}} rooms availble</h5>
+        <a href="{% url 'create-room' %}">Create Room</a>
+    <div>
+    {% for room in rooms %}
         <div>
             <a href="{% url 'update-room' room.id %}">edit</a>
             <a href="{% url 'delete-room' room.id %}">delete</a>
@@ -17,5 +40,9 @@
             <hr>
         </div>
     {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
 
