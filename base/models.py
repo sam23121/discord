@@ -18,8 +18,14 @@ class Room(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     descriptions = models.TextField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['-updated', '-created']
+
     def __str__(self):
         return self.name
+
+    
+
 
 class Message(models.Model):
     name = models.ForeignKey(Room, on_delete=models.CASCADE)
